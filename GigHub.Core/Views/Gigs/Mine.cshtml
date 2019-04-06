@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GigHub.Models.Gig>
+﻿@model IEnumerable<GigHub.Core.Models.Gig>
 
 @{
     ViewBag.Title = "My Upcoming Gigs";
@@ -64,7 +64,7 @@
                             className: "btn-danger",
                             callback: function () {
                                 $.ajax({
-                                    url: "/api/gigs/" + link.attr("data-gig-id"),
+                                    url: "/api/gigsapi/cancel/?id=" + link.attr("data-gig-id"),
                                     method: "DELETE"
                                 })
                                 .done(function () {

@@ -1,11 +1,13 @@
-﻿@model GigHub.Models.SendCodeViewModel
+﻿@model GigHub.Core.Models.SendCodeViewModel
 @{
     ViewBag.Title = "Send";
 }
 
 <h2>@ViewBag.Title.</h2>
+@* public Microsoft.AspNetCore.Mvc.Rendering.MvcForm BeginForm (string actionName, string controllerName, object routeValues, Microsoft.AspNetCore.Mvc.Rendering.FormMethod method, Nullable<bool> antiforgery, object htmlAttributes); *@
 
-@using (Html.BeginForm("SendCode", "Account", new { ReturnUrl = Model.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+@using (Html.BeginForm("SendCode", "Account", new { ReturnUrl = Model.ReturnUrl }, FormMethod.Post,null, new { @class = "form-horizontal", role = "form" }))
+{
     @Html.AntiForgeryToken()
     @Html.Hidden("rememberMe", @Model.RememberMe)
     <h4>Send verification code</h4>
@@ -20,5 +22,5 @@
 }
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    <partial name="_ValidationScriptsPartial" />
 }

@@ -1,12 +1,13 @@
-﻿using GigHub.Controllers;
-using GigHub.Models;
+﻿using GigHub.Core.Controllers;
+using GigHub.Core.Controllers.Api;
+using GigHub.Core.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
-using System.Web.Mvc;
 
-namespace GigHub.ViewModels
+namespace GigHub.Core.ViewModels
 {
     public class GigFormViewModel
     {
@@ -35,11 +36,11 @@ namespace GigHub.ViewModels
             get
             {
                 // calling the update method of the gigs controller
-                Expression<Func<GigsController, ActionResult>> update = 
+                Expression<Func<GigsController, IActionResult>> update = 
                     (c => c.Update(this));
 
                 // calling the create method of the gigs controller
-                Expression<Func<GigsController, ActionResult>> create =
+                Expression<Func<GigsController, IActionResult>> create =
                     (c => c.Create(this));
 
                 var action = (Id != 0) ? update : create;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace GigHub.Models
+namespace GigHub.Core.Models
 {
     public class Notification
     {
@@ -24,12 +24,7 @@ namespace GigHub.Models
 
         private Notification(NotificationType type, Gig gig)
         {
-            if (gig == null)
-            {
-                throw new ArgumentNullException("gig");
-            }
-
-            Gig = gig;
+            Gig = gig ?? throw new ArgumentNullException(nameof(gig));
             Type = type;
             DateTime = DateTime.Now;
         }
@@ -41,9 +36,11 @@ namespace GigHub.Models
 
         public static Notification GigUpdated(Gig newGig, DateTime originalDateTime, string originalVenue)
         {
-            var notification = new Notification(NotificationType.GigUpdated, newGig);
-            notification.OriginalDateTime = originalDateTime;
-            notification.OriginalVenue = originalVenue;
+            Notification notification = new Notification(NotificationType.GigUpdated, newGig)
+            {
+                OriginalDateTime = originalDateTime,
+                OriginalVenue = originalVenue
+            };
 
             return notification;
         }

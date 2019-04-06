@@ -74,7 +74,7 @@ namespace GigHub.Core.Migrations
                 {
                     table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
+                        name: "FK_AspNetRoleClaims_AspNetRoles",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
@@ -95,7 +95,7 @@ namespace GigHub.Core.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetUserClaims_AspNetUsers_UserId",
+                        name: "FK_AspNetUserClaims_AspNetUsers",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -115,7 +115,7 @@ namespace GigHub.Core.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
                     table.ForeignKey(
-                        name: "FK_AspNetUserLogins_AspNetUsers_UserId",
+                        name: "FK_AspNetUserLogins_AspNetUsers",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -133,13 +133,13 @@ namespace GigHub.Core.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
                     table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
+                        name: "FK_AspNetUserRoles_AspNetRoles",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetUsers_UserId",
+                        name: "FK_AspNetUserRoles_AspNetUsers",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -159,7 +159,7 @@ namespace GigHub.Core.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
                     table.ForeignKey(
-                        name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+                        name: "FK_AspNetUserTokens_AspNetUsers",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -177,17 +177,17 @@ namespace GigHub.Core.Migrations
                 {
                     table.PrimaryKey("PK_Followings", x => new { x.FolloweeId, x.FollowerId });
                     table.ForeignKey(
-                        name: "FK_Followings_AspNetUsers_FolloweeId",
+                        name: "FK_AspNetUsers_FolloweeId",
                         column: x => x.FolloweeId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.SetNull);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
-                        name: "FK_Followings_AspNetUsers_FollowerId",
+                        name: "FK_AspNetUsers_FollowerId",
                         column: x => x.FollowerId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.SetNull);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -230,17 +230,17 @@ namespace GigHub.Core.Migrations
                 {
                     table.PrimaryKey("PK_Attendances", x => new { x.GigId, x.AttendeeId });
                     table.ForeignKey(
-                        name: "FK_Attendances_AspNetUsers_AttendeeId",
+                        name: "FK_Attendances_AspNetUsers",
                         column: x => x.AttendeeId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
-                        name: "FK_Attendances_Gigs_GigId",
+                        name: "FK_Attendances_Gigs",
                         column: x => x.GigId,
                         principalTable: "Gigs",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.SetNull);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -278,17 +278,17 @@ namespace GigHub.Core.Migrations
                 {
                     table.PrimaryKey("PK_UserNotifications", x => new { x.NotificationId, x.UserId });
                     table.ForeignKey(
-                        name: "FK_UserNotifications_Notifications_NotificationId",
+                        name: "FK_UserNotifications_Notifications",
                         column: x => x.NotificationId,
                         principalTable: "Notifications",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
-                        name: "FK_UserNotifications_AspNetUsers_UserId",
+                        name: "FK_UserNotifications_AspNetUsers",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.SetNull);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(
@@ -336,17 +336,17 @@ namespace GigHub.Core.Migrations
                 column: "AttendeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Followings_FollowerId",
+                name: "IX_FollowerId",
                 table: "Followings",
                 column: "FollowerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Gigs_ArtistId",
+                name: "IX_ArtistId",
                 table: "Gigs",
                 column: "ArtistId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Gigs_GenreId",
+                name: "IX_GenreId",
                 table: "Gigs",
                 column: "GenreId");
 
@@ -356,7 +356,7 @@ namespace GigHub.Core.Migrations
                 column: "GigId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserNotifications_UserId",
+                name: "IX_UserNotifications",
                 table: "UserNotifications",
                 column: "UserId");
         }

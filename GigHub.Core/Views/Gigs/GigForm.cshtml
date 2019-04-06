@@ -1,4 +1,4 @@
-﻿@model GigHub.ViewModels.GigFormViewModel
+﻿@model GigHub.Core.ViewModels.GigFormViewModel
 @{
     ViewBag.Title = Model.Heading;
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -32,7 +32,7 @@
     </div>
     <button type="submit" class="btn btn-primary btn-lg">Save</button>
 }
-@section scripts
+@section Scripts
 {
-    @Scripts.Render("~/bundles/jqueryval")
+    <partial name="_ValidationScriptsPartial" />
 }

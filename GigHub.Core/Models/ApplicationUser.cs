@@ -1,15 +1,13 @@
-﻿using System.Data.Common;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System;
+using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
-namespace GigHub.Models
+namespace GigHub.Core.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
@@ -29,13 +27,23 @@ namespace GigHub.Models
             UserNotifications = new Collection<UserNotification>();
         }
 
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
-        {
-            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
-            var userIdentity = await manager.CreateAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-            // Add custom user claims here
-            return userIdentity;
-        }
+        //public async Task<IdentityResult> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
+        //{
+        //    var identity = new ClaimsIdentity();
+        //    identity.AddClaim(new Claim(ClaimTypes.Name, Name));
+        //    // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
+        //    var userIdentity = await manager.AddClaimsAsync(user: this, claims: identity);
+        //    // Add custom user claims here 
+        //    return userIdentity;
+        //}
+
+        //public async Task<IdentityResult> CreateAsync(ApplicationUser user, CancellationToken cancellationToken = default(CancellationToken))
+        //{
+        //    cancellationToken.ThrowIfCancellationRequested();
+        //    if (user == null) throw new ArgumentNullException(nameof(user));
+
+        //    return await user.CreateAsync(user);
+        //}
 
         public void Notify(Notification notification)
         {

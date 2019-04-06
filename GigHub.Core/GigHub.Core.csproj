@@ -7,6 +7,72 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Remove="wwwroot\css\animate.css" />
+    <Content Remove="wwwroot\lib\external\bootbox.min.js" />
+    <Content Remove="wwwroot\lib\external\moment.js" />
+    <Content Remove="wwwroot\lib\external\respond.js" />
+    <Content Remove="wwwroot\lib\external\respond.min.js" />
+    <Content Remove="wwwroot\lib\external\underscore.js" />
+    <Content Remove="wwwroot\lib\external\underscore-min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\css\animate.css" />
+    <None Include="wwwroot\lib\external\bootbox.min.js" />
+    <None Include="wwwroot\lib\external\moment.js" />
+    <None Include="wwwroot\lib\external\respond.js" />
+    <None Include="wwwroot\lib\external\respond.min.js" />
+    <None Include="wwwroot\lib\external\underscore.js" />
+    <None Include="wwwroot\lib\external\underscore-min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Followees\" />
+    <Folder Include="Views\Gigs\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="Dtos\" />
+    <Folder Include="Controllers\Api\" />
+    <Folder Include="Shared.Extensions\" />
+    <Folder Include="Views\Manage\" />
+    <Folder Include="Views\Account\" />
+    <Folder Include="wwwroot\lib\external\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Views\Shared\ApplicationUser.cs" />
+    <Compile Remove="Migrations\201608290906199_InitialModel.cs" />
+    <Compile Remove="Migrations\201608291011446_CreateGigTable.Designer.cs" />
+    <Compile Remove="Migrations\201608291011446_CreateGigTable.cs" />
+    <Compile Remove="Migrations\201608291108326_OverrideConventionsForGigsAndGenres.Designer.cs" />
+    <Compile Remove="Migrations\201608291108326_OverrideConventionsForGigsAndGenres.cs" />
+    <Compile Remove="Migrations\201608291147596_PopulateGenresTable.Designer.cs" />
+    <Compile Remove="Migrations\201608291147596_PopulateGenresTable.cs" />
+    <Compile Remove="Migrations\201608291437520_AddForeignKeyPropertiesToGig.Designer.cs" />
+    <Compile Remove="Migrations\201608291437520_AddForeignKeyPropertiesToGig.cs" />
+    <Compile Remove="Migrations\201608301208447_AddNameToApplicationUser.Designer.cs" />
+    <Compile Remove="Migrations\201608301208447_AddNameToApplicationUser.cs" />
+    <Compile Remove="Migrations\201608301444044_AddAttendance.Designer.cs" />
+    <Compile Remove="Migrations\201608301444044_AddAttendance.cs" />
+    <Compile Remove="Migrations\201609010808380_AddFollowings.Designer.cs" />
+    <Compile Remove="Migrations\201609010808380_AddFollowings.cs" />
+    <Compile Remove="Migrations\201611141428052_AddIsCanceledToGig.Designer.cs" />
+    <Compile Remove="Migrations\201611141428052_AddIsCanceledToGig.cs" />
+    <Compile Remove="Migrations\201611150924028_AddNotification.Designer.cs" />
+    <Compile Remove="Migrations\201611150924028_AddNotification.cs" />
+    <Compile Remove="Migrations\Configuration.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Migrations\201608290906199_InitialModel.resx" />
+    <EmbeddedResource Remove="Migrations\201608291011446_CreateGigTable.resx" />
+    <EmbeddedResource Remove="Migrations\201608291108326_OverrideConventionsForGigsAndGenres.resx" />
+    <EmbeddedResource Remove="Migrations\201608291147596_PopulateGenresTable.resx" />
+    <EmbeddedResource Remove="Migrations\201608291437520_AddForeignKeyPropertiesToGig.resx" />
+    <EmbeddedResource Remove="Migrations\201608301208447_AddNameToApplicationUser.resx" />
+    <EmbeddedResource Remove="Migrations\201608301444044_AddAttendance.resx" />
+    <EmbeddedResource Remove="Migrations\201609010808380_AddFollowings.resx" />
+    <EmbeddedResource Remove="Migrations\201611141428052_AddIsCanceledToGig.resx" />
+    <EmbeddedResource Remove="Migrations\201611150924028_AddNotification.resx" />
+  </ItemGroup>
 </Project>

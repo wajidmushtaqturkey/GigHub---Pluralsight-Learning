@@ -1,4 +1,4 @@
-﻿@model GigHub.Models.AddPhoneNumberViewModel
+﻿@model GigHub.Core.Models.AddPhoneNumberViewModel
 @{
     ViewBag.Title = "Phone Number";
 }
@@ -25,5 +25,5 @@
 }
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    <partial name="_ValidationScriptsPartial" />
 }

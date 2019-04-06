@@ -1,11 +1,7 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
-namespace GigHub.Models
+namespace GigHub.Core.Models
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -16,39 +12,48 @@ namespace GigHub.Models
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<UserNotification> UserNotifications { get; set; }
 
-        public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+             : base(options)
         {
         }
 
-        public static ApplicationDbContext Create()
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            return new ApplicationDbContext();
-        }
+            builder.Entity<Attendance>()
+                .HasKey(a => new { a.GigId, a.AttendeeId });
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Attendance>()
-                .HasRequired(a => a.Gig)
+            builder.Entity<Attendance>()
+                .HasOne(a => a.Gig)
                 .WithMany(g => g.Attendances)
-                .WillCascadeOnDelete(false);
+                .IsRequired()
+                .OnDelete(DeleteBehavior.SetNull);
 
-            modelBuilder.Entity<ApplicationUser>()
+
+            builder.Entity<ApplicationUser>()
                 .HasMany(u => u.Followers)
-                .WithRequired(f => f.Followee)
-                .WillCascadeOnDelete(false);
+                .WithOne(f => f.Followee)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.SetNull);
 
-            modelBuilder.Entity<ApplicationUser>()
+            builder.Entity<ApplicationUser>()
                 .HasMany(u => u.Followees)
-                .WithRequired(f => f.Follower)
-                .WillCascadeOnDelete(false);
+                .WithOne(f => f.Follower)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.SetNull);
 
-            modelBuilder.Entity<UserNotification>()
-                .HasRequired(n => n.User)
+            builder.Entity<UserNotification>()
+                .HasKey(u => new { u.NotificationId, u.UserId });
+
+            builder.Entity<UserNotification>()
+                .HasOne(n => n.User)
                 .WithMany(u => u.UserNotifications)
-                .WillCascadeOnDelete(false);
+                .IsRequired()
+                .OnDelete(DeleteBehavior.SetNull);
 
-            base.OnModelCreating(modelBuilder);
+            builder.Entity<Following>()
+                .HasKey(f => new { f.FolloweeId, f.FollowerId });
+
+            base.OnModelCreating(builder);
         }
     }
 }

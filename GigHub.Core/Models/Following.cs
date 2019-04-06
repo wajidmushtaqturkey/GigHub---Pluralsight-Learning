@@ -1,15 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GigHub.Models
+namespace GigHub.Core.Models
 {
     public class Following
     {
-        [Key]
+        //[Key]
         [Column(Order = 1)]
         public string FollowerId { get; set; }
 
-        [Key]
+        //[Key]
         [Column(Order = 2)]
         public string FolloweeId { get; set; }
 

@@ -1,4 +1,4 @@
-﻿@model GigHub.ViewModels.RegisterViewModel
+﻿@model GigHub.Core.ViewModels.RegisterViewModel
 @{
     ViewBag.Title = "Register";
 }
@@ -43,5 +43,5 @@
 }
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    <partial name="_ValidationScriptsPartial" />
 }

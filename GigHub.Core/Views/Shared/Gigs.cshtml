@@ -1,4 +1,4 @@
-﻿@model GigHub.ViewModels.GigsViewModel
+﻿@model GigHub.Core.ViewModels.GigsViewModel
 @{
     ViewBag.Title = "Home Page";
 }
@@ -53,35 +53,58 @@
 </ul>
 @section scripts
 {
-    <script>
-        $(document).ready(function () {
-            $('#SearchTerm').focus(function () {
-                $(this).removeAttr('placeholder');
-            });
-            $(".js-toggle-attendance").click(function(e) {
-                var button = $(e.target);
-                $.post("/api/attendances", { gigId: button.attr("data-gig-id") })
-                    .done(function() {
-                        button
-                            .removeClass("btn-default")
-                            .addClass("btn-info")
-                            .text("Going");
-                    })
-                    .fail(function() {
-                        alert("Something failed!");
-                    });
-            });
-
-            $(".js-toggle-follow").click(function (e) {
-                var button = $(e.target);
-                $.post("/api/followings", { followeeId: button.attr("data-user-id") })
-                    .done(function () {
-                        button.text("Following");
-                    })
-                    .fail(function () {
-                        alert("Something failed");
-                    });
-            });
+<script>
+$(document).ready(function () {
+        $('#SearchTerm').focus(function () {
+            $(this).removeAttr('placeholder');
         });
+        $(".js-toggle-attendance").click(function (e) {
+            var button = $(e.target);
+            var url = "/api/attendances/attend/";
+            return $.ajax({
+                url: url,
+                type: "POST",
+                data: JSON.stringify({ gigId: button.attr("data-gig-id") }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(jqXHR, textStatus,errorThrown) {
+                    button
+                        .removeClass("btn-default")
+                        .addClass("btn-info")
+                        .text("Going");
+                },
+            });
+                @*.done(function () {
+                    button
+                        .removeClass("btn-default")
+                        .addClass("btn-info")
+                        .text("Going");
+                })
+                .fail(function () {
+                    alert("Something failed!");
+                });*@
+        });
+
+        $(".js-toggle-follow").click(function (e) {
+            var button = $(e.target);
+            var url = "/api/followings/follow/";
+            return $.ajax({
+                url: url,
+                type: "POST",
+                data: JSON.stringify({ followeeId: button.attr("data-user-id") }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (jqXHR, textStatus,errorThrown) {
+                    button.text("Following");
+                },
+            })
+            @*.done(function () {
+                button.text("Following");
+            })
+            .fail(function () {
+                alert("Something failed");
+            });*@
+        });
+    });
     </script>
 }
